@@ -10,11 +10,13 @@ use Illuminate\Validation\ValidationException;
 Route::post('/register', function (Request $request) {
     $request->validate([
         'email' => 'required|string|email|unique:users',
+        'name' => 'required|string',
         'password' => 'required|string|min:8',
     ]);
 
     $user = User::create([
         'email' => $request->email,
+        'name' => $request->name,
         'password' => Hash::make($request->password),
     ]);
 
